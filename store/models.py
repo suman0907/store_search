@@ -20,6 +20,8 @@ class Store(models.Model):
     latitude = models.DecimalField(null=False, max_digits=10, decimal_places=5)
     longitude = models.DecimalField(null=False, max_digits=10, decimal_places=5)
     geolocation = models.PointField(srid=4326, null=False)
+    updated_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     def update(self, **kwargs):
         for key, value in kwargs.items():
