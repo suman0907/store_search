@@ -9,7 +9,7 @@ DATABASES = {
         'NAME': 'store_management',
         'USER': 'root',
         'PASSWORD': 'password',
-        'HOST': '172-31-11-58',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
