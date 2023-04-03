@@ -9,10 +9,7 @@ DATABASES = {
         'NAME': 'store_management',
         'USER': 'root',
         'PASSWORD': 'password',
-        'HOST': '54.250.248.149',
+        'HOST': '172-31-11-58',
         'PORT': '5432',
     }
 }
-
-GDAL_LIBRARY_PATH="/opt/homebrew/opt/gdal/lib/libgdal.dylib"
-GEOS_LIBRARY_PATH="/opt/homebrew/opt/geos/lib/libgeos_c.dylib"

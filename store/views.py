@@ -6,7 +6,7 @@ from rest_framework import status
 from .serializers import StoreSerializer
 from .models import Store
 import json
-from django.contrib.gis import gdal, geos
+#from django.contrib.gis import gdal, geos
 from .constants import *
 from django.contrib.gis.measure import Distance
 from django.contrib.gis.geos import Point
@@ -24,7 +24,7 @@ def add_store(request):
             for field in store_req_fields:
                 if field not in fetched_fields:
                     raise Exception("Missing Required field for store addition %s", field)
-            data['geolocation'] = geos.Point(data['longitude'], data['latitude'])
+            data['geolocation'] = Point(data['longitude'], data['latitude'])
             serializer = StoreSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
@@ -33,7 +33,7 @@ def add_store(request):
             if (data.get('latitude') and data.get('longitude') is None) or (data.get('latitude') is None and data.get('longitude')):
                 raise Exception("latitude or longitude cant be partially updated: Provide both values")
             if data.get('latitude') and data.get('longitude'):
-                data['geolocation'] = geos.Point(data['longitude'], data['latitude'])
+                data['geolocation'] = Point(data['longitude'], data['latitude'])
             store_obj = Store.objects.filter(id=id)
             if store_obj:
                 store_obj[0].update(**data)
@@ -50,7 +50,7 @@ def add_store(request):
         }, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(http_method_names=['GET'])
+@api_view(http_method_names=['GET', 'OPTIONS'])
 def get_stores(request):
     try:
         longitude = request.query_params.get('longitude')
