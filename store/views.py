@@ -125,7 +125,7 @@ def search(request):
         point = Point((float(longitude), float(latitude)), srid=4326)
 
         store_list = Store.objects.filter(
-         geolocation__distance_lte=(point, Distance(m=distance*1000)))
+         geolocation__distance_lte=(point, Distance(km=distance)))
 
         serializer = StoreSerializer(store_list, many=True)
         return Response({
